@@ -1,0 +1,57 @@
+﻿@model List<Student>
+@{
+    ViewData["Title"] = "Home Page";
+    var i = 1;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<table>
+    @foreach (var s in Model)
+    {
+
+        var properties = s.GetType().GetProperties();
+        if (i == 1)
+        {
+
+            <thead>
+            
+                <tr>
+                    @foreach (var property in properties)
+                    {
+
+                        <td>@property.Name</td>
+                    }
+                </tr>
+            </thead>
+            i++;
+        }
+        <tr>
+            @foreach (var property in properties)
+            {
+                <td>@property.GetValue(s)</td>
+            }
+        </tr>
+    }
+
+    @*<thead>
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+            </tr>
+
+
+        </thead>
+        @foreach (var s in Model)
+        {
+        <tr>
+            <td>@s.id</td>
+            <td>@s.name</td>
+        </tr>
+
+
+        }*@
+</table>
